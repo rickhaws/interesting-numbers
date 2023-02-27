@@ -2,6 +2,10 @@ const YES = 2;
 const ALMOST = 1;
 const NO = 0;
 
+/* */function nameOf(x) {
+  return Object.keys(x)[0];
+}
+
 function getDigits(number) {
   return number.toString().split('').map(c => Number(c));
 }
@@ -40,12 +44,41 @@ function isAwesome(number, awesomePhrases) {
   return awesomePhrases.findIndex(p => number === p) >= 0;
 }
 
+const testFunctions = [
+  isRollover, 
+  isAllOneDigit, 
+  isSequentialIncreasing, 
+  isSequentialDecreasing, 
+  isPalindrome, 
+  isAwesome
+];
+
+function isThisNumberInteresting(number, awesomePhrases) {
+  for (f of testFunctions) {
+    if (f(number, awesomePhrases)) { return true; }
+  }
+  return false;
+}
+
+
+
 function isInteresting(number, awesomePhrases) {
-  /* */console.log(isRollover(900000))
-  /* */console.log(isAllOneDigit(444444))
-  /* */console.log(isSequentialIncreasing(7890))
-  /* */console.log(isSequentialDecreasing(543210))
-  /* */console.log(isPalindrome(184838481))
-  /* */console.log(isPalindrome(145541))
-  /* */console.log(isAwesome(3434343434, [0,0,0,0,3434343434,0,0]))
+  /* */console.log(number, awesomePhrases)
+  /* */console.log("isRollover", isRollover(number))
+  /* */console.log("isAllOneDigit", isAllOneDigit(number))
+  /* */console.log("isSequentialIncreasing", isSequentialIncreasing(number))
+  /* */console.log("isSequentialDecreasing", isSequentialDecreasing(number))
+  /* */console.log("isPalindrome", isPalindrome(number))
+  /* */console.log("isAwesome", isAwesome(number, awesomePhrases));
+
+  
+  let result = NO;
+  if (number >= 100 && isThisNumberInteresting(number, awesomePhrases)) {
+    result = YES;
+  } else if (
+    number >= 99 && isThisNumberInteresting(number+1, awesomePhrases) ||
+    number >= 98 && isThisNumberInteresting(number+2, awesomePhrases)) {
+    result = ALMOST;
+  }
+  return result;
 }
