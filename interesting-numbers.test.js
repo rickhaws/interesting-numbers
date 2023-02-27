@@ -8,8 +8,10 @@ const assert = chai.assert;
 // Uncomment the following to use the old assertions:
 // const Test = require("@codewars/test-compat");
 
-describe("Solution", function() {
-  it("should test for something", function() {
+const Test = require('@codewars/test-compat');
+
+describe('Basic inputs', function() {
+  it('should pass all conditions', function() {
     Test.assertEquals(isInteresting(99, [10000012]), 1);
     Test.assertEquals(isInteresting(98, [10000012]), 1);
     Test.assertEquals(isInteresting(100, [10000012]), 2);
@@ -23,5 +25,14 @@ describe("Solution", function() {
     Test.assertEquals(isInteresting(1338, [1337, 31415, 314159, 24680]), 0);
     Test.assertEquals(isInteresting(2477, [1337, 31415, 314159, 24680]), 0);
     Test.assertEquals(isInteresting(24681, [1337, 31415, 314159, 24680]), 0);
+    Test.assertEquals(isInteresting(3, [1337, 256]),     0);
+    Test.assertEquals(isInteresting(98, [1337, 256]),    1);
+    Test.assertEquals(isInteresting(3, [1337, 256]),     0);
+    Test.assertEquals(isInteresting(1336, [1337, 256]),  1);
+    Test.assertEquals(isInteresting(1337, [1337, 256]),  2);
+    Test.assertEquals(isInteresting(11208, [1337, 256]), 0);
+    Test.assertEquals(isInteresting(11209, [1337, 256]), 1);
+    Test.assertEquals(isInteresting(11211, [1337, 256]), 2);
   });
+});  });
 });
