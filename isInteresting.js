@@ -2,10 +2,6 @@ const YES = 2;
 const ALMOST = 1;
 const NO = 0;
 
-/* */function nameOf(x) {
-  return Object.keys(x)[0];
-}
-
 function getDigits(number) {
   return number.toString().split('').map(c => Number(c));
 }
@@ -38,7 +34,6 @@ const isSequentialDecreasing = (number) => isSeries(number, -1);
 function isPalindrome(number) {
   const digits = getDigits(number);
   const digits2 = getDigits(number).reverse();
-//   /* */ console.log(digits, digits2);
   return JSON.stringify(digits) === JSON.stringify(digits2);
 }
 
@@ -65,26 +60,13 @@ function isThisNumberInteresting(number, awesomePhrases) {
 
 
 function isInteresting(number, awesomePhrases) {
-  /* */console.log(number, awesomePhrases)
-  /* */console.log("isRollover", isRollover(number))
-  /* */console.log("isAllOneDigit", isAllOneDigit(number))
-  /* */console.log("isSequentialIncreasing", isSequentialIncreasing(number))
-  /* */console.log("isSequentialDecreasing", isSequentialDecreasing(number))
-  /* */console.log("isPalindrome", isPalindrome(number))
-  /* */console.log("isAwesome", isAwesome(number, awesomePhrases));
-
-  
   for (n of [number, number + 1, number + 2]) {
-    /* */console.log(n);
     if (n < 100) { 
-      /* */console.log(`${n} is less than 100`);
       continue; 
     }
     if (isThisNumberInteresting(n, awesomePhrases)) { 
-      /* */console.log(`${n} is interesting; returning ${+(n === number) + 1}`);
       return +(n === number) + 1; 
     }
   }
-  /* */console.log("returning", NO);
   return NO;
 }
