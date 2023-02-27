@@ -37,7 +37,9 @@ const isSequentialDecreasing = (number) => isSeries(number, -1);
 
 function isPalindrome(number) {
   const digits = getDigits(number);
-  return digits === digits.reverse();
+  const digits2 = getDigits(number).reverse();
+//   /* */ console.log(digits, digits2);
+  return JSON.stringify(digits) === JSON.stringify(digits2);
 }
 
 function isAwesome(number, awesomePhrases) {
@@ -72,13 +74,17 @@ function isInteresting(number, awesomePhrases) {
   /* */console.log("isAwesome", isAwesome(number, awesomePhrases));
 
   
-  let result = NO;
-  if (number >= 100 && isThisNumberInteresting(number, awesomePhrases)) {
-    result = YES;
-  } else if (
-    number >= 99 && isThisNumberInteresting(number+1, awesomePhrases) ||
-    number >= 98 && isThisNumberInteresting(number+2, awesomePhrases)) {
-    result = ALMOST;
+  for (n of [number, number + 1, number + 2]) {
+    /* */console.log(n);
+    if (n < 100) { 
+      /* */console.log(`${n} is less than 100`);
+      continue; 
+    }
+    if (isThisNumberInteresting(n, awesomePhrases)) { 
+      /* */console.log(`${n} is interesting; returning ${+(n === number) + 1}`);
+      return +(n === number) + 1; 
+    }
   }
-  return result;
+  /* */console.log("returning", NO);
+  return NO;
 }
